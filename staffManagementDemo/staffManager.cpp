@@ -234,6 +234,33 @@ void StaffManager::Delete_Emp(){
 
 };
 
+void StaffManager::clean_data(){
+    cout<< "delete all data ? 1:yes; 2:no " << endl;
+    int select = 0;
+    cin >>select;
+    if(select ==2){
+        return;
+    } else{
+        ofstream ofs(FILENAME,ios::trunc); //删除并 新建
+        ofs.close();
+        //释放 heep data
+        if(this->m_EmpArray !=NULL){
+            for (int i = 0; i < this->m_EmpNum; ++i) {
+                if(this->m_EmpArray[i] != NULL){
+                    delete this->m_EmpArray[i];
+                    this->m_EmpArray[i]=NULL;
+                }
+            }
+            delete[] this->m_EmpArray;
+            this->m_EmpArray = NULL;
+            this->m_EmpNum = 0;
+            this->m_FileIsEmpty = true;
+        }
+        cout<< "data clear successful~!" <<endl;
+    }
+    system( "read -n 1 -s -p \"Press any key to continue...\"" );
+};
+
 int StaffManager::save(){
     ofstream ofs;
     ofs.open(FILENAME,ios::out);
@@ -270,8 +297,8 @@ void StaffManager:: showMenu(){
     cout <<"**** 2 : show staff information ******" <<endl;
     cout <<"**** 3 : delete staff information ****" <<endl;
     cout <<"**** 4 : edit staff information ******" <<endl;
-    cout <<"**** 5 : find staff information ******" <<endl;
-    cout <<"**** 6 : sort all staff **************" <<endl;
+//    cout <<"**** 5 : find staff information ******" <<endl;
+//    cout <<"**** 6 : sort all staff **************" <<endl;
     cout <<"**** 7 : clean file ******************" <<endl;
     cout <<"**************************************" <<endl;
 
@@ -286,6 +313,13 @@ void StaffManager::exitSystem() {
 
 StaffManager::~StaffManager() {
     if(this->m_EmpArray !=NULL){
+
+        for (int i = 0; i < this->m_EmpNum; ++i) {
+            if(this->m_EmpArray[i] != NULL){
+                delete this->m_EmpArray[i];
+                this->m_EmpArray[i]=NULL;
+            }
+        }
         delete[] this->m_EmpArray;
         this->m_EmpArray = NULL;
     }

@@ -40,13 +40,13 @@ int main() {
                 break;
             case 4:
                 staffManager.modify_Emp();
-
                 break;
             case 5:
                 break;
             case 6:
                 break;
             case 7:
+                staffManager.clean_data();
                 break;
             default:
                 system("cls");

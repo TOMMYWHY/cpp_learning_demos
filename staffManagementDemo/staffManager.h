@@ -33,6 +33,7 @@ public:
     int IsExist(int id);
     void Delete_Emp();
     void modify_Emp();
+    void clean_data();
     ~StaffManager();
 };
 
