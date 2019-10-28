@@ -3,4 +3,5 @@ project(basic02)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(basic02 staffManagementDemo/main.cpp staffManagementDemo/staffManager.h staffManagementDemo/staffManager.cpp staffManagementDemo/staff/staff.h staffManagementDemo/staff/employee.cpp staffManagementDemo/staff/employee.h staffManagementDemo/staff/manager.cpp staffManagementDemo/staff/manager.h staffManagementDemo/staff/boss.cpp staffManagementDemo/staff/boss.h)
+add_executable(basic02 staffManagementDemo/main.cpp staffManagementDemo/staffManager.h staffManagementDemo/staffManager.cpp staffManagementDemo/staff/staff.h staffManagementDemo/staff/employee.cpp staffManagementDemo/staff/employee.h staffManagementDemo/staff/manager.cpp staffManagementDemo/staff/manager.h staffManagementDemo/staff/boss.cpp staffManagementDemo/staff/boss.h reivew_basic/main.cpp)
+add_executable(reivew_basic reivew_basic/main.cpp)
