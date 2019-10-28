@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#if 1
+#if 0
 // reference
 void change_value(int* p ){
     *p =30;
@@ -33,3 +33,32 @@ int main(){
 
 #endif
 //============================
+
+#if 1
+//
+void swap_byPointer (int * a, int * b){
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+
+}
+void swap_byRef(int &a, int &b){
+    int temp;
+    temp = a;
+    a = b;
+    b= temp;
+}
+int main(){
+    int a = 11;
+    int b = 22;
+//    swap_byPointer(&a,&b);
+    swap_byRef(a,b);
+    cout << "a: " << a <<endl;
+    cout << "b: " << b <<endl;
+
+
+    return 0;
+}
+#endif
+//*********************************
