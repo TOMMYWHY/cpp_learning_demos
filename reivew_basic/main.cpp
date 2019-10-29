@@ -143,7 +143,8 @@ int main() {
 
 #endif
 //*********************************
-#if 1
+
+#if 0
 /*
  * const引用
  */
@@ -153,6 +154,39 @@ int main(){
     int const &ref = a;
 
     return 0;
+}
+#endif
+//*********************************
+
+#if 1
+/*
+ * reload 函数指针
+ */
+//1
+int fun (int a, int b){
+    cout<< "fun" <<endl;
+    return 0;
+}
+typedef int (MY_fun) (int,int);
+
+int fun(int a, int b,int c){
+    cout<< "fun +a+b+c" <<endl;
+    return 0;
+}
+int main(){
+    MY_fun * fp = NULL;
+    fp = fun;
+    fp(10,20);//
+    (*fp)(10,20);//same with above
+//3
+    int(*fp3)(int,int) = NULL;
+    fp3= fun;
+    fp3(10,20);
+    int(*fp4)(int,int,int) = NULL;
+    fp4 =fun;
+    fp4(1,2,3);
+    return 0;
+
 }
 #endif
 //*********************************
