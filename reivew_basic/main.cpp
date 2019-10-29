@@ -250,7 +250,7 @@ int main() {
 //*********************************
 
 
-#if 1
+#if 0
 /*
  * 深拷贝
  * 浅拷贝：拷贝常量区或字符区时，二次析构释放非法内存。
@@ -293,5 +293,60 @@ int main(){
     test1();
     return 0;
 }
+#endif
+//*********************************
+
+#if 1
+/*
+ * 构造参数列表
+ * 成员中有其他对象时，构造初始化方式
+ */
+class A {
+public:
+    A(int a) {
+        this->m_a = a;
+    }
+
+    void printA() {
+        cout << this->m_a << endl;
+    }
+
+private:
+    int m_a;
+};
+
+class B {
+public:
+//    B(int mB, const A &mA1, const A &mA2) : m_b(mB), m_a1(mA1), m_a2(mA2) {}
+
+    B(int b, A &a1, A &a2) : m_a1(a1), m_a2(a2) // 调用 A 的构造
+    {
+        this->m_b = b;
+        cout << "B created..."<<endl;
+    }
+
+    void printB() {
+        cout << this->m_b << endl;
+        this->m_a1.printA();
+        this->m_a2.printA();
+    }
+
+    ~B() {
+        cout << "~B dead..." << endl;
+    }
+
+private:
+    int m_b;
+    A m_a1;
+    A m_a2;
+};
+
+int main() {
+    A a1(10),a2(100);
+    B b(1000 , a1,a2);
+    b.printB();
+    return 0;
+}
+
 #endif
 //*********************************
