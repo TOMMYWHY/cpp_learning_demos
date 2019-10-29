@@ -158,7 +158,7 @@ int main(){
 #endif
 //*********************************
 
-#if 1
+#if 0
 /*
  * reload 函数指针
  */
@@ -187,6 +187,111 @@ int main(){
     fp4(1,2,3);
     return 0;
 
+}
+#endif
+//*********************************
+
+
+#if 0
+
+/*
+ * 拷贝构造
+ */
+class Test {
+public:
+    Test(){
+        this->x = 0;
+        this->y = 0;
+    }
+    Test(int x, int y) {
+        this->x = x;
+        this->y = y;
+        cout << " 构造构造函数 "<< endl;
+    }
+
+    void printT() {
+        cout << x << "," << y << endl;
+    }
+    // 拷贝构造函数 对象作为参数或返回值都会调用 // 默认拷贝构造函数 如下
+    Test(const Test &other){
+        this->x = other.x;
+        this->y = other.y;
+        cout << " 拷贝构造函数 "<< endl;
+    }
+    ~Test(){
+        cout << " 我死啦。。。"<< endl;
+    }
+private:
+    int x;
+    int y;
+};
+
+void test1(){
+    Test t1(10,20);
+    Test t2(t1);
+}
+//
+
+int main() {
+#if 0
+    Test t3; // 无参构造 不能加（ ）
+    Test t1(1,2);
+    Test t2(t1);
+    t2.printT();
+    Test t4= t1; //操作符重载
+    t4.printT();
+    cout << " ============== " <<endl;
+#endif
+    test1();
+    return 0;
+}
+
+#endif
+//*********************************
+
+
+#if 1
+/*
+ * 深拷贝
+ * 浅拷贝：拷贝常量区或字符区时，二次析构释放非法内存。
+ */
+class Teacher{
+public:
+    int id;
+    char * name;
+    Teacher(int id, char * name){
+        this->id = id;
+        int len = strlen(name);
+        this->name =(char *) malloc(len+1);
+        strcpy(this->name,name);
+    }
+    Teacher(const Teacher &other){
+        this->id = other.id;
+        //深拷贝
+        int len = strlen(other.name);
+        this->name = (char *) malloc(len+1);
+        strcpy(this->name, other.name);
+    }
+
+    ~Teacher(){
+        if(this->name != NULL){
+            free(this->name);
+            this->name = NULL;
+        }
+    }
+    void printT() {
+        cout << this->id << " : " << this->name << endl;
+    }
+};
+void test1(){
+    Teacher t1(100,"tommy");
+    t1.printT();
+    Teacher t2(t1);
+    t2.printT();
+}
+int main(){
+    test1();
+    return 0;
 }
 #endif
 //*********************************
